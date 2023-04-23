@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faPenToSquare,faTrashCan} from '@fortawesome/free-solid-svg-icons'
+import EditTask from '../models/EditTask';
 
-const Card1 = ({task,index,deleteTask,updateList}) => {
+const Card1 = ({task,index,deleteTask,updateTask}) => {
     const [modal, setModal] = useState(false);
 
     const colors = [
@@ -26,21 +29,42 @@ const Card1 = ({task,index,deleteTask,updateList}) => {
         }
     ]
 
-    return (
-        <div class = "card-wrapper mr-5">
-            <div class = "card-top" style={{"background-color": colors[index%5].primaryColor}}></div>
-            <div class = "task-holder">
-                <span class = "card-header" style={{"background-color": colors[index%5].secondaryColor, "border-radius": "10px"}}>
-                    {task['name']}
-                </span>
-                <p className = "mt-3">{task['discription']}</p>
+    const handleDelete=()=>{
+        deleteTask(index)
+    }
+    const updateTask1=(task)=>{
+        updateTask(task,index)
+    }
 
-                <div style={{"position": "absolute", "right" : "20px", "bottom" : "20px"}}>
-                    <i class = "far fa-edit mr-3" style={{"color" : colors[index%5].primaryColor, "cursor" : "pointer"}} onClick = {() => setModal(true)}></i>
-                    <i class="fas fa-trash-alt" style = {{"color" : colors[index%5].primaryColor, "cursor" : "pointer"}} ></i>
+    return (
+        <div className = "card-wrapper rounded">
+            <div className = "card-top rounded-top w-100" style={{"backgroundColor": colors[index%5].primaryColor}}></div>
+            <div className = "task-holder">
+                <span className = "card-header rounded p-2 text-white" style={{"backgroundColor": colors[index%5].primaryColor}}>
+                    Title: {task['name']}
+                </span>
+                <p className = "card-description" style={{"borderColor": colors[index%5].primaryColor}}>
+                    {task['description']}
+                </p>
+
+                <div className='d-flex mt-auto mx-auto'>
+                    <div className='card-edit'>
+                        <FontAwesomeIcon
+                            icon={faPenToSquare} 
+                            style={{"color" : colors[index%5].primaryColor, "cursor" : "pointer"}} 
+                            onClick = {()=>setModal(true)} />
+                    </div>
+                    <div className='card-del'>
+                        <FontAwesomeIcon
+                            icon={faTrashCan} 
+                            style = {{"color" : colors[index%5].primaryColor, "cursor" : "pointer"}}
+                            onClick={handleDelete}
+                            />
+                    </div>
+                    
                 </div>
         </div>
-        {/* <EditTask modal = {modal} toggle = {toggle} updateTask = {updateTask} taskObj = {taskObj}/> */}
+        <EditTask modal = {modal} toggle = {()=>setModal(false)} updateTask = {updateTask1} task = {task}/>
         </div>  
     )
 }

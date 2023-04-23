@@ -1,21 +1,23 @@
 import { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-const CreateTask = ({modal,toggle,save}) => {
-    const [name,setName]=useState('')
-    const [description,setDesription]=useState('')
+const EditTask = ({modal,task,toggle ,updateTask}) => {
+    const [name,setName]=useState(task.name)
+    const [description,setDesription]=useState(task.description)
     
-    function handleSubmit() {
-        const task={name,description}
+    function handleSubmit(e) {
+        e.preventDefault()
+        let task={name,description}
         setDesription('')
         setName('')
-        save(task)
+        console.log(task);
+        updateTask(task)
     }
 
     return (
         <div>
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Add Task</ModalHeader>
+                <ModalHeader toggle={toggle}>Edit Task</ModalHeader>
                 <ModalBody>
                     <form >
                         <div className="form-group">
@@ -46,7 +48,7 @@ const CreateTask = ({modal,toggle,save}) => {
                 </ModalBody>
                 <ModalFooter>
                 <Button color="primary" onClick={handleSubmit}>
-                    Create Task
+                    Edit Task
                 </Button>{' '}
                 <Button color="secondary" onClick={toggle}>
                     Cancel
@@ -57,4 +59,4 @@ const CreateTask = ({modal,toggle,save}) => {
     )
 }
 
-export default CreateTask
+export default EditTask
