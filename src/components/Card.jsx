@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPenToSquare,faTrashCan} from '@fortawesome/free-solid-svg-icons'
 import EditTask from '../models/EditTask';
 
-const Card1 = ({task,index,deleteTask,updateTask}) => {
+const Card = ({task,index,deleteTask,updateTask}) => {
     const [modal, setModal] = useState(false);
 
     const colors = [
@@ -69,4 +69,4 @@ const Card1 = ({task,index,deleteTask,updateTask}) => {
     )
 }
 
-export default Card1
+export default Card

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CreateTask from '../models/CreateTask'
-import Card from './Card1';
+import Card from './Card';
 
 const TodoList = () => {
     const [modal, setModal] = useState(false);
@@ -20,7 +20,7 @@ const TodoList = () => {
         
         taskList.push(taskObj)
         console.log(taskList)
-        
+
         localStorage.setItem("taskList",JSON.stringify(taskList))
         setModal(false)
         // console.log(taskList);
